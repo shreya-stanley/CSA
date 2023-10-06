@@ -1,3 +1,5 @@
+import javax.sound.sampled.SourceDataLine;
+
 public class Frog {
 	private String name;
 	private int xPos;
@@ -35,15 +37,13 @@ public class Frog {
 	{
 		yPos=yPos+1;
 	}
-
-    public void jump(int numberOfSpaces){
-		this.setPos(getXPos() + numberOfSpaces, getYPos() + numberOfSpaces);
-    }
-
-    public void visit(Frog frogsFriend){
-        this.setPos(frogsFriend.getXPos(),
-		 frogsFriend.getYPos());
-    }
+	//TODO jump method move up and to the right
+	//This method should take an integer argument.  This argument controls how many spaces
+	// the frog will move both up and right.  Returns no value.
+	
+	//TODO visit method moves frog to the location of the friend frog
+	// This method will take an argument of type Frog.  It will find the position of the
+	// frog and move to this position.  Returns no value.
 	
 	public void eatFly()
 	{
@@ -54,9 +54,17 @@ public class Frog {
 		String s = "Hi I am "+ name +" the frog and I live at "+ xPos + " " + yPos;
 		return s; 
 	}
+	public void jump(int northAndEast){
+		xPos+=northAndEast;
+		yPos+=northAndEast;
+	}
+	public void visit(Frog otherFrog){
+		setPos(otherFrog.getXPos(),otherFrog.getYPos());
+	}
 	
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		Frog f1 = new Frog("Freddy",3,4);	// create an instance of Frog
 		f1.eatFly();						// call Frog methods
 		f1.moveNorth();
@@ -64,18 +72,31 @@ public class Frog {
 		
 		Frog f2 = new Frog("Francine", -2,0);
 		f2.eatFly();
+		// TODO uncomment these to test new code.
 		f2.jump(2);
 		f1.visit(f2);
 		System.out.println(f1);
 		System.out.println(f2);
 		
-        Frog frank = new Frog("Frank", 3, 2);
-        frank.jump(2);
-		frank.jump(2);
-        System.out.println(frank);
-        frank.visit(f1);
-        System.out.println(frank); 
+		// make a new frog named Frank.  have him jump twice and then go visit Freddy.
+		Frog f3 = new Frog("Franck", 4, 5);
+		f3.eatFly();
+		f3.jump(8);
+		f3.jump(10);
+		System.out.println(f3);
+		f3.visit(f1);
+		System.out.println(f3);
 
 	}
 
 }
+
+/*  Output
+Freddy
+Yum
+Hi I am Freddy the frog and I live at 3 5
+Francine
+Yum
+Hi I am Freddy the frog and I live at 0 2
+Hi I am Francine the frog and I live at 0 2
+*/
